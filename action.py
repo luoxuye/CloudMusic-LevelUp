@@ -203,7 +203,14 @@ class CloudMusic:
         else:
             return "刷听歌量失败 " + str(ret["code"]) + "：" + ret["message"]
 
+# Server酱报错推送提醒，需要填下下面的key，官网：https://sc.ftqq.com/3.version
+SCKEY = ""
 
+def pushMessage(data):
+    if SCKEY != "":
+        return requests.post(f"https://sc.ftqq.com/{SCKEY}.send", data=data)
+    else:
+        return False
 if __name__ == "__main__":
     # Get Args
     info = get_args()
@@ -222,9 +229,10 @@ if __name__ == "__main__":
     print(30 * "=")
     # noinspection PyBroadException
     try:
-        if info["sckey"]:
-            # 调用Server酱
-            server_chan_turbo(info["sckey"][0], res_print)
+        pushMessage({
+            "text": f"网易云音乐 {res}",
+            "desp": time.strftime("%Y-%m-%d %H:%M:%S")
+        })
     except Exception:
         print("Server酱调用失败：" + str(Exception))
     print(30 * "=")
