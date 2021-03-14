@@ -230,7 +230,7 @@ if __name__ == "__main__":
     # noinspection PyBroadException
     try:
         pushMessage({
-            "text": f"网易云音乐 {res}",
+            "text": f"网易云音乐 {res_print}",
             "desp": time.strftime("%Y-%m-%d %H:%M:%S")
         })
     except Exception:
