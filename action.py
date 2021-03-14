@@ -16,7 +16,7 @@ import binascii
 import argparse
 import random
 from Crypto.Cipher import AES
-
+import time
 
 # Get the arguments input.
 def get_args():
